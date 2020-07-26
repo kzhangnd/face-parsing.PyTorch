@@ -4,6 +4,7 @@
 from logger import setup_logger
 from model import BiSeNet
 import sys
+import pandas as pd
 
 import torch
 
@@ -69,7 +70,8 @@ def evaluate(source='./data', dest='./res/test_res', cp='evaluate.pth'):
 
     if path.isfile(source):
         full_path = True
-        dspth = np.sort(np.loadtxt(source, dtype=np.str))
+        #dspth = np.sort(np.loadtxt(source, dtype=np.str))
+        dspth = np.sort(np.asarray(pd.read_csv(source, delimiter=' ', header=None)).flatten())
     else:
         full_path = False
         dspth = listdir(source)
